@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h> 
 int main(){
 	int n;
 	int luachon;
@@ -49,36 +50,37 @@ int main(){
 				}
 				break;
 			}
-			case 3:{
-			 if (n <= 0) {
-                    printf("Mang chua duoc nhap! nhap lai\n");
-                } else {
-                  	printf("cac so nguyen to trong mang la: ");
-					int dem1=0;  
-					for(int i=0;i<n;i++){
-						int dem =1;
-						if(a[i]<2){
-							dem=0;
-						}else{
-							for(int j=2;j<a[i]* a[i];j++){
-								if(a[i]%j==0){
-									dem=0;
-									break;
-								}
-							}
-						}
-						if(dem==1){
-							dem1++;
-						}
-						if(dem=0){
-						printf("mang da cho khong chua so nguyen to");
+			case 3: {
+			    if (n <= 0) {
+			        printf("Mang chua duoc nhap! Moi nhap lai.\n");
+			    } else {
+			        int dem = 0;
+			        printf("Cac so nguyen to trong mang la: ");
+			        for (int i = 0; i < n; i++) {
+						int is_prime = 1; 
+			            if (a[i] < 2) {
+			                is_prime = 0; 
+			            } else {
+			                for (int j = 2; j <= sqrt(a[i]); j++) {
+			                    if (a[i] % j == 0) {
+			                        is_prime = 0; 
+			                        break;
+			                    }
+			                }
+			            }
+			            if (is_prime) {
+			                printf("%d ", a[i]);
+			                dem++;
+			            }
+			        }
+					        if (dem == 0) {
+					            printf("Khong co so nguyen to nao trong mang.\n");
+					        } else {
+					            printf("\nTong so nguyen to trong mang: %d\n", dem);
+					        }
+					    }
+					    break;
 					}
-					}
-					printf("so luong so nguyen to co trong mang la: %d",dem1);
-					
-                }
-                break;
-            }
 		    case 4:{
 				if (n == 0) {
                     printf("Mang chua duoc nhap! nhap lai\n");
@@ -99,39 +101,51 @@ int main(){
 				}
 				break;
 			}
-			 case 5:{
-                if (n== 0) {
-                    printf("Mang chua duoc nhap! nhap lai\n");
-                }else{
-					
-						int dem;int min=a[0];
-					for(int i=0;i<n;i++){
-						if(a[i]<min){
-							dem=min;
-							min=a[i];
-						}
-					}
-					printf("gia tri nho thu 2 trong mang la:%d", dem);
+			case 5: {
+				    if (n <= 1) {
+				        printf("Mang khong co du hai phan tu de tim gia tri nho thu hai.\n");
+				    } else {
+				        int INT_MAX; 
+				        int min1 = a[0], min2 = INT_MAX;
+				        for (int i = 1; i < n; i++) {
+				            if (a[i] < min1) {
+				                min2 = min1;
+				                min1 = a[i];
+				            } else if (a[i] > min1 && a[i] < min2) {
+				                min2 = a[i];
+				            }
+									        }
+					        if (min2 == INT_MAX) {
+					            printf("Mang khong co gia tri nho thu hai (tat ca gia tri bang nhau).\n");
+					        } else {
+					            printf("Gia tri nho thu hai trong mang la: %d\n", min2);
+					        }
+					    }
+					    break;
+                       }
+            case 6: {
+			    if (n <= 1) {
+			        printf("Mang khong co du hai phan tu de tim gia tri lon thu hai.\n");
+			    } else {
+			    	int INT_MIN; 
+			        int max1 = a[0], max2 = INT_MIN;
+			        for (int i = 1; i < n; i++) {
+			            if (a[i] > max1) {
+			                max2 = max1;
+			                max1 = a[i];
+			            } else if (a[i] < max1 && a[i] > max2) {
+			                max2 = a[i];
+			            }
+			        }
+				        if (max2 == INT_MIN) {
+				            printf("Mang khong co gia tri lon thu hai (tat ca gia tri bang nhau).\n");
+				        } else {
+				            printf("Gia tri lon thu hai trong mang la: %d\n", max2);
+				        }
+				    }
+				    break;
 				}
-                break;
-            }
-            case 6:{
-                if (n == 0) {
-                    printf("Mang chua duoc nhap! nhap lai\n");
-                }else{
-					
-						int dem;int max=a[0];
-					for(int i=0;i<n;i++){
-						if(a[i]>max){
-							dem=max;
-							max=a[i];
-						}
-					}
-					printf("gia tri lon thu 2 trong mang la:%d", dem);
-				}  	
-				break;
-			}
-		    case 7:{
+			case 7:{
 		    	int giatri, vitri;
 		    	printf("nhap gia tri muon them: ");
 		    	scanf("%d", &giatri);
@@ -244,7 +258,7 @@ int main(){
 				while(start<=end){
 					mid=(start+end)/2;
 					if(a[mid]==giatri){
-						printf("\nphan tu can tim o vi tri %d :",mid+1);
+						printf("\nphan tu can tim o vi tri %d : ",mid+1);
 						dem=1;
 						break;
 					}else if(a[mid]>giatri){
